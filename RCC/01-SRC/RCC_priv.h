@@ -2,15 +2,19 @@
  * @Author                : Islam Tarek<islam.tarek@valeo.com>               *
  * @CreatedDate           : 2023-03-08 07:59:59                              *
  * @LastEditors           : Islam Tarek<islam.tarek@valeo.com>               *
- * @LastEditDate          : 2023-03-08 17:38:43                              *
- * @FilePath              : MCAL/MCAL_STM32F103/RCC/01-SRC/RCC_priv.h        *
+ * @LastEditDate          : 2023-03-08 18:33:06                              *
+ * @FilePath              : RCC_priv.h                                       *
  * @CopyRight             : MerBleueAviation                                 *
  ****************************************************************************/
 
 #ifndef RCC_PRIV_H_
 #define RCC_PRIV_H_
 
+/**
+* @brief Includes Section
+*/
 #include "../../../../LIB/Std_LIB/std_type.h"
+
 /**
  * @brief RCC Registers Base Address.
  */
