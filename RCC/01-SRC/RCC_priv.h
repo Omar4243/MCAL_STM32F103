@@ -1,10 +1,10 @@
 /*****************************************************************************
- * @Author                : Islam Tarek<islam.tarek@valeo.com>               *
+ * @Author                : Islam Tarek<islamtarek0550@gmail.com>            *
  * @CreatedDate           : 2023-03-08 07:59:59                              *
- * @LastEditors           : Islam Tarek<islam.tarek@valeo.com>               *
- * @LastEditDate          : 2023-03-08 18:33:06                              *
+ * @LastEditors           : Islam Tarek<islamtarek0550@gmail.com>            *
+ * @LastEditDate          : 2023-03-12 22:44:26                              *
  * @FilePath              : RCC_priv.h                                       *
- * @CopyRight             : MerBleueAviation                                 *
+ * @CopyRight             : Islam Tarek CopyRight                            *
  ****************************************************************************/
 
 #ifndef RCC_PRIV_H_
@@ -18,7 +18,7 @@
 /**
  * @brief RCC Registers Base Address.
  */
-#define RCC_BASE                0x40021000UL
+#define RCC_BASE                0x40021000
 
 /**
  * @brief RCC Clock Control Register and Its bits.
@@ -59,8 +59,7 @@ typedef union
         u32 PPRE1       :3 ;
         u32 PPRE2       :3 ;
         u32 ADCPRE      :2 ;
-        u32 PLLSRC      :1 ;
-        u32 PLLXTPRE    :1 ;
+        u32 PLLSRC      :2 ;
         u32 PLLMUL      :4 ;
         u32 USBPRE      :1 ;
         u32 Reserved_0  :1 ;
@@ -339,7 +338,7 @@ typedef struct
 /**
  * @brief Mapping of RCC registers structure to memory.
  */
-#define RCC_REG     (volatile RCC_reg_t *)(RCC_BASE)
+#define RCC_REG     ((volatile RCC_reg_t *)(RCC_BASE))
 
 /**
  * @brief Limits of AHB Bus Peripherals
@@ -360,5 +359,12 @@ typedef struct
  */
 #define APB1_MIN_LIMIT          64U
 #define APB1_MAX_LIMIT          96U
+
+/**
+ * @brief Oscillator State.
+ */
+
+#define OSC_OFF                 0U
+#define OSC_ON                  1U
 
 #endif

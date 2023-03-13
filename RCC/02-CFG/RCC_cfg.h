@@ -2,7 +2,7 @@
  * @Author                : Islam Tarek<islamtarek0550@gmail.com>            *
  * @CreatedDate           : 2023-03-09 00:36:39                              *
  * @LastEditors           : Islam Tarek<islamtarek0550@gmail.com>            *
- * @LastEditDate          : 2023-03-12 21:20:21                              *
+ * @LastEditDate          : 2023-03-12 23:11:03                              *
  * @FilePath              : RCC_cfg.h                                        *
  * @CopyRight             : Islam Tarek CopyRight                            *
  ****************************************************************************/
@@ -23,11 +23,18 @@
 #define PLL   2U  
 
 /**
- * @brief PLL clock source
+ * @brief HSE Clock Source options
+ */
+
+#define HSE_NOT_BYPASS  0U
+#define HSE_BYPASS      1U
+
+/**
+ * @brief PLL cClock Source options
  */
 #define HSI_CLK_DIV_BY_2   0U  /* HSI / 2 will be PLL source        */
 #define HSE_CLK            1U  /* HSE or HSE / 2 will be PLL source */
-#define HSE_CLK_DIV_BY_2   2U  /* HSE / 2 will bw PLL source */
+#define HSE_CLK_DIV_BY_2   3U  /* HSE / 2 will be PLL source */
 
 /**
  * @brief PLL Multiplication factor options
@@ -47,7 +54,7 @@
 #define PLL_CLK_MUL_BY_13   11U /* PLL input clock * 13 */
 #define PLL_CLK_MUL_BY_14   12U /* PLL input clock * 14 */
 #define PLL_CLK_MUL_BY_15   13U /* PLL input clock * 15 */
-#define PLL_CLK_MUL_BY_16   14U /* PLL input clock * 16 */
+#define PLL_CLK_MUL_BY_16   15U /* PLL input clock * 16 */
 
 
 /**
@@ -123,6 +130,13 @@
  */
 
 #define SYSCLK_SRC              HSI              
+
+/**
+ * @brief HSE Clock Configuration
+ * * Options (HSE_NOT_BYPASS, HSE_BYPASS)
+ */
+
+#define HSE_CLK_SRC     HSE_NOT_BYPASS
 
 /**
  * @brief PLL Clock Configuration
