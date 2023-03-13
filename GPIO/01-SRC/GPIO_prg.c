@@ -1,11 +1,15 @@
-// Header: Stm32f103c8 Drivers
-// File Name: GPIO Source File
-// Author: Omar Megahed Ismail
-// Date: 2022/03/18
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 21:41:19                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-13 23:57:43                              *
+ * @FilePath              : GPIO_prg.c                                       *
+ ****************************************************************************/
+
 /*Include files*/
-#include "GPIO.h"
-#include "Macros.h"
-#include "RCC.h"
+#include "GPIO_int.h"
+#include "bit_math.h"
+#include "RCC_int.h"
 
 /*GPIO Functions*/
 void vGPIO_Pin_Set_Mode(GPIOx *GPIO, Pin_Num_Type PinNum, Pin_Status_Type Pin_Status)
@@ -236,7 +240,7 @@ void vGPIO_Pin_Write(GPIOx *GPIO, Pin_Num_Type PinNum, Logic_Type Logic)
 		break;
 	}
 }
-uint8 u8GPIO_Pin_Read(GPIOx *GPIO, Pin_Num_Type PinNum)
+u8 u8GPIO_Pin_Read(GPIOx *GPIO, Pin_Num_Type PinNum)
 {
 	return CHECK_BIT(GPIO->IDR.Reg, PinNum);
 }

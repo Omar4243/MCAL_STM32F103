@@ -1,10 +1,13 @@
-// Header: Stm32f103c8 Drivers
-// File Name: EXTI Source File
-// Author: Omar Megahed Ismail
-// Date: 2022/03/20
-#include "EXTI.h"
-#include "Macros.h"
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 23:31:08                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-13 23:57:01                              *
+ * @FilePath              : EXTI_prg.c                                       *
+ ****************************************************************************/
 
+#include "EXTI_int.h"
+#include "bit_math.h"
 
 void vEXTI_NonMask(EXTI_Line_t lineNum)
 {
@@ -29,7 +32,7 @@ void vEXTI_SWTrigger(EXTI_Line_t LineNum)
 {
 SET_BIT(EXTI_SWIER,LineNum);
 }
-void vEXTI_SelectPin(Port_Type PORTn ,uint8 PinNum)
+void vEXTI_SelectPin(Port_Type PORTn ,u8 PinNum)
 {
  
  if(PinNum<=3)

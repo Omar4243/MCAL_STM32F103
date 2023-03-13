@@ -1,10 +1,14 @@
-// Header: Stm32f103c8 Drivers
-// File Name: EXTI Header File
-// Author: Omar Megahed Ismail
-// Date: 2022/03/20
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 21:26:59                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-13 23:35:54                              *
+ * @FilePath              : EXTI_int.h                                       *
+ ****************************************************************************/
+
 #ifndef EXTI_H_
 #define EXTI_H_
-#include "EXTI_Priv.h"
+#include "EXTI_priv.h"
 typedef enum
 {
   Rising_Edge=0,
@@ -47,6 +51,6 @@ void vEXTI_EventType(EXTI_Line_t lineNum,EXTI_Event_Type EXTI_Event);
 
 void vEXTI_SWTrigger(EXTI_Line_t LineNum);
 
-void vEXTI_SelectPin(Port_Type PORTn ,uint8 PinNum);
+void vEXTI_SelectPin(Port_Type PORTn ,u8 PinNum);
 
 #endif

@@ -1,9 +1,14 @@
-// Header: Stm32f103c8 Drivers
-// File Name: RCC Source File
-// Author: Omar Megahed Ismail
-// Date: 2022/03/16
-#include "RCC.h"
-#include "Macros.h"
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 22:22:22                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-14 00:00:14                              *
+ * @FilePath              : RCC_prg.c                                        *
+ ****************************************************************************/
+
+#include "RCC_int.h"
+#include "bit_math.h"
+
 void vRCC_Init(void)
 {
 
@@ -337,7 +342,7 @@ void vRCC_Init(void)
 	}
 }
 
-void vRCC_EnPerClk(Bus_Name Bus, uint8 Peripheral_Name)
+void vRCC_EnPerClk(Bus_Name Bus, u8 Peripheral_Name)
 {
 	switch (Bus)
 	{

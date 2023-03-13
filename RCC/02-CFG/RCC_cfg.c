@@ -1,7 +1,11 @@
-// Header: Stm32f103c8 Drivers
-// File Name: RCC Configration File
-// Author: Omar Megahed Ismail
-// Date: 2022/03/16
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 22:25:23                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-13 22:25:28                              *
+ * @FilePath              : RCC_cfg.c                                        *
+ ****************************************************************************/
+
 #ifndef RCC_CONFIG_
 #define RCC_CONFIG_
 /*CLK_SRC*/

@@ -1,11 +1,16 @@
-// Header: Stm32f103c8 Drivers
-// File Name: GPIO Header File
-// Author: Omar Megahed Ismail
-// Date: 2022/03/16
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 21:26:25                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-13 22:14:19                              *
+ * @FilePath              : GPIO_int.h                                       *
+ ****************************************************************************/
+
+
 #ifndef GPIO_H_
 #define GPIO_H_
 /*Include Files*/
-#include "GPIO_Priv.h"
+#include "GPIO_priv.h"
 /*Enums*/
 typedef enum
 {
@@ -64,7 +69,7 @@ void vGPIO_Pin_Set_OutputSpeed (GPIOx * GPIO  ,  Pin_Num_Type  PinNum  ,  Pin_Sp
 
 void vGPIO_Pin_Write           (GPIOx * GPIO  ,  Pin_Num_Type  PinNum  ,  Logic_Type          Logic         );
 
-uint8 u8GPIO_Pin_Read          (GPIOx * GPIO  ,  Pin_Num_Type  PinNum );
+u8 u8GPIO_Pin_Read          (GPIOx * GPIO  ,  Pin_Num_Type  PinNum );
 
 
 

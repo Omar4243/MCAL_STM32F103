@@ -1,11 +1,15 @@
-// Header: Stm32f103c8 Drivers
-// File Name: RCC Header File
-// Author: Omar Megahed Ismail
-// Date: 2022/03/16
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 22:20:27                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-14 00:01:39                              *
+ * @FilePath              : RCC_int.h                                        *
+ ****************************************************************************/
+
 #ifndef RCC_H_
 #define RCC_H_
-#include "RCC_Priv.h"
-#include "RCC_Config.h"
+#include "RCC_priv.h"
+#include "RCC_cfg.h"
 
 typedef enum
 {
@@ -16,6 +20,6 @@ typedef enum
 
 void vRCC_Init(void);
 
-void vRCC_EnPerClk(Bus_Name Bus, uint8 Peripheral_Name);
+void vRCC_EnPerClk(Bus_Name Bus, u8 Peripheral_Name);
 
 #endif

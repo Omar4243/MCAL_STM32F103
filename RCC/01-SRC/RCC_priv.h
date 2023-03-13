@@ -1,26 +1,30 @@
-// Header: Stm32f103c8 Drivers
-// File Name: RCC Memory Map "Register Addresses"
-// Author: Omar Megahed Ismail
-// Date: 2022/03/15
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 22:24:16                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-13 23:25:25                              *
+ * @FilePath              : RCC_Priv.h                                       *
+ ****************************************************************************/
+
 #ifndef RCC_PRIV_
 #define RCC_PRIV_
 /*include hesder files*/
-#include "Std_Type.h"
+#include "std_type.h"
 
 /*RCC base address*/
 #define RCC_BASE (0x40021000)
 
 /*RCC Registers addresses*/
-#define RCC_CR       (*((volatile uint32 *)(RCC_BASE + 0x00  )))
-#define RCC_CFGR     (*((volatile uint32 *)(RCC_BASE + 0x04  )))    
-#define RCC_CIR      (*((volatile uint32 *)(RCC_BASE + 0x08  )))    
-#define RCC_APB2RSTR (*((volatile uint32 *)(RCC_BASE + 0x0c  )))    
-#define RCC_APB1RSTR (*((volatile uint32 *)(RCC_BASE + 0x010 )))    
-#define RCC_AHBENR   (*((volatile uint32 *)(RCC_BASE + 0x14  )))    
-#define RCC_APB2ENR  (*((volatile uint32 *)(RCC_BASE + 0x18  )))    
-#define RCC_APB1ENR  (*((volatile uint32 *)(RCC_BASE + 0x1c  )))    
-#define RCC_BDCR     (*((volatile uint32 *)(RCC_BASE + 0x20  )))    
-#define RCC_CSR      (*((volatile uint32 *)(RCC_BASE + 0x24  )))    
+#define RCC_CR       (*((volatile u32 *)(RCC_BASE + 0x00  )))
+#define RCC_CFGR     (*((volatile u32 *)(RCC_BASE + 0x04  )))    
+#define RCC_CIR      (*((volatile u32 *)(RCC_BASE + 0x08  )))    
+#define RCC_APB2RSTR (*((volatile u32 *)(RCC_BASE + 0x0c  )))    
+#define RCC_APB1RSTR (*((volatile u32 *)(RCC_BASE + 0x010 )))    
+#define RCC_AHBENR   (*((volatile u32 *)(RCC_BASE + 0x14  )))    
+#define RCC_APB2ENR  (*((volatile u32 *)(RCC_BASE + 0x18  )))    
+#define RCC_APB1ENR  (*((volatile u32 *)(RCC_BASE + 0x1c  )))    
+#define RCC_BDCR     (*((volatile u32 *)(RCC_BASE + 0x20  )))    
+#define RCC_CSR      (*((volatile u32 *)(RCC_BASE + 0x24  )))    
 
 /*RCC_CR Bits*/
 #define PLLRDY       (25)

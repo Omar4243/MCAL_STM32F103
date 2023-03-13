@@ -1,60 +1,64 @@
-// Header: Stm32f103c8 Drivers
-// File Name: SYSTICK Reg Map File
-// Author: Omar Megahed Ismail
-// Date: 2022/03/19
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 23:39:05                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-14 00:01:07                              *
+ * @FilePath              : SysTick_priv.h                                   *
+ ****************************************************************************/
+
 #ifndef SYSTICK_PRIV_
 #define SYSTICK_PRIV_
 /*include lib*/
-#include "Std_Type.h"
+#include "std_type.h"
 /*systick base address*/
 #define SysTick ((SysTick_Type*)0xE000E010)  
 /*systick reg struct*/
 /*STK_CTRL*/
 typedef union
 {
-	uint32 data;
+	u32 data;
 	struct
     {
-			uint32 ENABLE    :1;
-			uint32 TICKINT   :1;
-			uint32 CLKSOURCE :1;
-			uint32           :13;
-			uint32 COUNTFLAG :1;
-			uint32           :15;
+			u32 ENABLE    :1;
+			u32 TICKINT   :1;
+			u32 CLKSOURCE :1;
+			u32           :13;
+			u32 COUNTFLAG :1;
+			u32           :15;
     }Bit;
 }CTRL_TYP;
 /*STK_LOAD*/
 typedef union
 {
-	uint32 data;
+	u32 data;
 	struct
     {
-			uint32 RELOAD    :24;
-			uint32           :8;
+			u32 RELOAD    :24;
+			u32           :8;
 
     }Bit;
 }LOAD_TYP;
 /*STK_VAL*/ /*CURRENT VALUE*/
 typedef union
 {
-	uint32 data;
+	u32 data;
 	struct
     {
-			uint32 CURRENT    :24;
-			uint32            :8;
+			u32 CURRENT    :24;
+			u32            :8;
 
     }Bit;
 }VAL_TYP;
 /*STK_CALIB*/ 
 typedef union
 {
-	uint32 data;
+	u32 data;
 	struct
     {
-			uint32 TENMS      :24;
-			uint32            :6;
-			uint32 SKEW       :1;
-			uint32 NOREF      :1;
+			u32 TENMS      :24;
+			u32            :6;
+			u32 SKEW       :1;
+			u32 NOREF      :1;
    
     }Bit;
 }CALIB_TYP;

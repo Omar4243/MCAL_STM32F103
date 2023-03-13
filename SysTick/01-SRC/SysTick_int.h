@@ -1,16 +1,20 @@
-// Header: Stm32f103c8 Drivers
-// File Name: SYS TICK function Header File
-// Author: Omar Megahed Ismail
-// Date: 2022/03/19
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 23:37:35                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-14 00:00:48                              *
+ * @FilePath              : SysTick_int.h                                    *
+ ****************************************************************************/
+
 #ifndef _SYSTICK_
 #define _SYSTICK_
-#include "Std_Type.h"
-#include "SysTick_Priv.h"
+#include "std_type.h"
+#include "SysTick_priv.h"
 /*sys clock freq*/
 #define SYS_CLK_FRQ  (72000000Ul)
 
 
-void SysTick_Interrupt_Init(uint8 ms);/*max 200 ms*/
+void SysTick_Interrupt_Init(u8 ms);/*max 200 ms*/
 
 void SysTick_Start(void);
 

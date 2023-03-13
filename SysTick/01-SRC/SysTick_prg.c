@@ -1,17 +1,18 @@
-// Header: Stm32f103c8 Drivers
-// File Name: SysTick function implementation File
-// Author: Omar Megahed Ismail
-// Date: 2022/03/19
-#include "Std_Type.h"
-#include "SysTick.h"
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 23:37:58                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-13 23:38:50                              *
+ * @FilePath              : SysTick_prg.c                                    *
+ ****************************************************************************/
 
+#include "SysTick_int.h"
 
-
-void SysTick_Interrupt_Init(uint8 ms)
+void SysTick_Interrupt_Init(u8 ms)
 {
 	if(ms>200){ms=200;}
 SysTick->CTRL.Bit.CLKSOURCE=1;// PROCESSOR CLK SOURCE	
-SysTick->LOAD.data=(uint32)((SYS_CLK_FRQ/1000)*ms);	
+SysTick->LOAD.data=(u32)((SYS_CLK_FRQ/1000)*ms);	
 }
 void SysTick_Start(void)
 {

@@ -1,8 +1,16 @@
-#include "UART.h"
-#include "NVIC.h"
-#include "RCC.h"
-#include "GPIO.h"
-#include "Macros.h"
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 23:45:45                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-13 23:56:40                              *
+ * @FilePath              : UART_prg.c                                       *
+ ****************************************************************************/
+
+#include "UART_int.h"
+#include "NVIC_int.h"
+#include "RCC_int.h"
+#include "GPIO_int.h"
+#include "bit_math.h"
 
 void vUART_Enable(UART_TYP *UART, uint32 baud_rate, uint8 data_bits, PARITY_TYP parity, uint8 stop_bit)
 {

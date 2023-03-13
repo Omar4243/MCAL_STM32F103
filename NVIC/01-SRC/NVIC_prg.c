@@ -1,11 +1,16 @@
-// Header: Stm32f103c8 Drivers
-// File Name: NVIC Source File
-// Author: Omar Megahed Ismail
-// Date: 2022/03/20
-#include "NVIC.h"
-#include "NVIC_Config.h"
-#include "Macros.h"
-void vNVIC_EnableIRQ( uint8 IRQn ) 
+/*****************************************************************************
+ * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @CreatedDate           : 2023-03-13 23:26:27                              *
+ * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
+ * @LastEditDate          : 2023-03-13 23:58:17                              *
+ * @FilePath              : NVIC_prg.c                                       *
+ ****************************************************************************/
+
+#include "NVIC_int.h"
+#include "NVIC_cfg.h"
+#include "bit_math.h"
+
+void vNVIC_EnableIRQ( u8 IRQn ) 
 {
 if(IRQn<=31)
   {
@@ -22,7 +27,7 @@ else if((IRQn>63) && (IRQn<=80))
  else{}
 }
 
-void vNVIC_DisableIRQ( uint8 IRQn )
+void vNVIC_DisableIRQ( u8 IRQn )
 {
 if(IRQn<=31)
   {
@@ -39,7 +44,7 @@ else if((IRQn>63) && (IRQn<=80))
  else{}
 }	
 														 					 
-void vNVIC_SetPendingIRQ   ( uint8 IRQn )
+void vNVIC_SetPendingIRQ   ( u8 IRQn )
 {
 if(IRQn<=31)
   {
@@ -55,7 +60,7 @@ else if((IRQn>63) && (IRQn<=80))
   }
  else{}
 }
-void vNVIC_ClearPendingIRQ ( uint8 IRQn )
+void vNVIC_ClearPendingIRQ ( u8 IRQn )
 {
 	if(IRQn<=31)
   {
@@ -72,9 +77,9 @@ else if((IRQn>63) && (IRQn<=80))
  else{}
 }
 														 					 
-uint8 u8NVIC_GetActive     ( uint8 IRQn )
+u8 u8NVIC_GetActive     ( u8 IRQn )
 {
-	uint8 status=0;
+	u8 status=0;
  if(IRQn<=31)
   {
    status = CHECK_BIT(NVIC_IABR0,IRQn);
@@ -91,7 +96,7 @@ else if((IRQn>63) && (IRQn<=80))
  return status;
 }
 														 					 
-void vNVIC_SetPriority     ( uint8 IRQn ,  uint8 Subpriority  ,  uint8 GroupPriority )
+void vNVIC_SetPriority     ( u8 IRQn ,  u8 Subpriority  ,  u8 GroupPriority )
 {
 /*SET Priorty Config*/
 	SCB_AIRCR->VECTKEY=SCB_VECTKEY; /*MUST WRITE KEY BEFORE SET SCB_AIRCR REG*/
