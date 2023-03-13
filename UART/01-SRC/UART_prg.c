@@ -2,7 +2,7 @@
  * @Author                : Omar MEGAHED<omar.megahed@valeo.com>             *
  * @CreatedDate           : 2023-03-13 23:45:45                              *
  * @LastEditors           : Omar MEGAHED<omar.megahed@valeo.com>             *
- * @LastEditDate          : 2023-03-13 23:56:40                              *
+ * @LastEditDate          : 2023-03-14 00:09:04                              *
  * @FilePath              : UART_prg.c                                       *
  ****************************************************************************/
 
