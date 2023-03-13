@@ -2,7 +2,7 @@
  * @Author                : Islam Tarek<islamtarek0550@gmail.com>            *
  * @CreatedDate           : 2023-03-09 00:36:39                              *
  * @LastEditors           : Islam Tarek<islamtarek0550@gmail.com>            *
- * @LastEditDate          : 2023-03-12 23:11:03                              *
+ * @LastEditDate          : 2023-03-14 00:12:46                              *
  * @FilePath              : RCC_cfg.h                                        *
  * @CopyRight             : Islam Tarek CopyRight                            *
  ****************************************************************************/
@@ -70,7 +70,7 @@
 
 
 /**
- * @brief Microcontroller Clock Output (MCO) opitons
+ * @brief Micro_controller Clock Output (MCO) options
  */
 
 #define MCO_NO_CLK             0U  /* MCO will not output a clock                                */
@@ -80,7 +80,7 @@
 #define MCO_PLL_CLK_DIV_BY_2   7U  /* Output of MCO pin will be output of PLL / 2                */
 
 /**
- * @brief AHB Clock Prescaler options
+ * @brief AHB Clock Pre_scaler options
  */
 
 #define SYSCLK              0U  /* AHB Clock will be the System Clock       */
@@ -94,7 +94,7 @@
 #define SYSCLK_DIV_BY_512   15U /* AHB Clock will be the System Clock / 512 */
 
 /**
- * @brief APB Clock Prescaler options
+ * @brief APB Clock Pre_scaler options
  */
 
 #define HCLK             0U  /* APB Clock will be same as AHB Clock */
@@ -104,14 +104,14 @@
 #define HCLK_DIV_BY_16   7U  /* APB Clock will be AHB Clock / 16    */
 
 /**
- * @brief USB Clock Prescaler options.
+ * @brief USB Clock Pre_scaler options.
  */
 
 #define PLL_CLK_DIV_BY_1_5   0U  /* USB clock will be PLL clock / 1.5 */
 #define PLL_CLK              1U  /* USB clock will be PLL clock       */
 
 /**
- * @brief ADC Clock Prescaler options.
+ * @brief ADC Clock Pre_scaler options.
  */
 
 #define PCLK2_DIV_BY_2   0U  /* ADC Clock will be APB2 Clock / 2 */
@@ -129,7 +129,7 @@
  * * Options (HSI, HSE, PLL)
  */
 
-#define SYSCLK_SRC              HSI              
+#define SYSCLK_SRC              HSI
 
 /**
  * @brief HSE Clock Configuration
@@ -164,7 +164,7 @@
 #define CSS                     CSS_DISABLE
 
 /**
- * @brief Microcontroller output (MCO) Configuration
+ * @brief Micro_controller output (MCO) Configuration
  * * Options (MCO_NO_CLK, MCO_SYSCLK, MCO_HSI_CLK, MCO_HSE_CLK, MCO_PLL_CLK_DIV_BY_2)
  * !Note: Make sure that output clock doesn't exceed 50 MHZ.
  * !Note: MCO pin on blue pill is PA8 pin.
@@ -173,7 +173,7 @@
 #define MCO_CLK                 MCO_NO_CLK
 
 /**
- * @brief AHB CLock Prescaler Configuration
+ * @brief AHB CLock Pre_scaler Configuration
  * * Options (SYSCLK, SYSCLK_DIV_BY_2, SYSCLK_DIV_BY_4, SYSCLK_DIV_BY_8, SYSCLK_DIV_BY_16, 
  * *          SYSCLK_DIV_BY_64, SYSCLK_DIV_BY_128, SYSCLK_DIV_BY_256, SYSCLK_DIV_BY_512)
  * !Note: SYSCLK is the clock of the system. 
@@ -183,7 +183,7 @@
 #define AHB_CLK_PRESCALER       SYSCLK
 
 /**
- * @brief APB CLock Prescaler Configuration
+ * @brief APB cLock Pre_scaler Configuration
  * * Options (HCLK, HCLK_DIV_BY_2, HCLK_DIV_BY_4, HCLK_DIV_BY_8, HCLK_DIV_BY_16)
  * !Note: HCLK is the the clock of AHB Bus
  * !Note: The maximum allowed frequency for APB2 Bus is 72 MHZ
@@ -194,16 +194,16 @@
 #define APB1_CLK_PRESCALER      HCLK_DIV_BY_2
 
 /**
- * @brief USB Clock Prescaler Configuration
+ * @brief USB Clock Pre_scaler Configuration
  * * Options (PLL_CLK_DIV_BY_1_5, PLL_CLK)
- * !Note: USB prescaler must be valid before enabling USB clock.
+ * !Note: USB Pre_scaler must be valid before enabling USB clock.
  * !Note: USB clock is 48 MHZ.
  */
 
 #define USB_CLK_PRESCALER       PLL_CLK
 
 /**
- * @brief ADC Clock Prescaler Configuration
+ * @brief ADC Clock Pre_scaler Configuration
  * * Options (PCLK2_DIV_BY_2, PCLK2_DIV_BY_4, PCLK2_DIV_BY_6, PCLK2_DIV_BY_8)
  * !Note: PCLK2 is the clock of the APB2 Bus
  */

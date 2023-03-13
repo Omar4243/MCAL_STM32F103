@@ -14,8 +14,8 @@
  * @brief Include Section
  */
 
-#include "../../../../LIB/Std_LIB/std_type.h"
-#include "../../../../LIB/Std_LIB/bit_math.h"
+#include "std_type.h"
+#include "bit_math.h"
 
 /**
  * @brief Typedefs Section
@@ -56,9 +56,9 @@ typedef enum
  * @brief APIs Section
  */
 
-std_errorStatus_t MCAL_enu_Rcc_init   (void);
-std_errorStatus_t MCAL_enu_Rcc_enable (peripheral_t local_enuPeripheral);
-std_errorStatus_t MCAL_enu_Rcc_disable(peripheral_t local_enuPeripheral);
-std_errorStatus_t MCAL_enu_Rcc_reset  (peripheral_t local_enuPeripheral);
+std_errorStatus_t RCC_init   				(void);
+std_errorStatus_t RCC_enable_peripheral_clk (peripheral_t local_enuPeripheral);
+std_errorStatus_t RCC_disable_peripheral_clk(peripheral_t local_enuPeripheral);
+std_errorStatus_t RCC_reset_peripheral  	(peripheral_t local_enuPeripheral);
 
 #endif

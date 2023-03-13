@@ -2,7 +2,7 @@
  * @Author                : Islam Tarek<islamtarek0550@gmail.com>            *
  * @CreatedDate           : 2023-03-08 07:59:59                              *
  * @LastEditors           : Islam Tarek<islamtarek0550@gmail.com>            *
- * @LastEditDate          : 2023-03-12 22:44:26                              *
+ * @LastEditDate          : 2023-03-14 00:02:05                              *
  * @FilePath              : RCC_priv.h                                       *
  * @CopyRight             : Islam Tarek CopyRight                            *
  ****************************************************************************/
@@ -13,7 +13,7 @@
 /**
 * @brief Includes Section
 */
-#include "../../../../LIB/Std_LIB/std_type.h"
+#include "std_type.h"
 
 /**
  * @brief RCC Registers Base Address.
