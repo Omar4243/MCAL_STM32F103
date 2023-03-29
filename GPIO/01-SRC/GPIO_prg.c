@@ -174,8 +174,38 @@ std_errorStatus_t GPIO_set_pin_level(gpio_port_t local_enuPort, gpio_pin_t local
  * @param local_enuPinLevel is the level which will be got.
  * @return Error state which describes the state of API (Passed or failed).
  */
-std_errorStatus_t GPIO_get_pin_level(gpio_port_t local_enuPort, gpio_pin_t local_enuPin, gpio_pin_level_t *local_enuPinLevel)
+std_errorStatus_t GPIO_get_pin_level(gpio_port_t local_enuPort, gpio_pin_t local_enuPin, gpio_pin_level_t* local_enuPinLevel)
 {
+    std_errorStatus_t error_State = STD_OK;
+
+    /* Check if the Pointer isn't NULL */
+    if(local_enuPinLevel != STD_NULL)
+    {
+        /* Check if the Port exists */
+        if((local_enuPort >= GPIO_A) && (local_enuPort < GPIO_LAST))
+        {
+            /* Check if the Pin exists */
+            if((local_enuPin >= GPIO_PIN_0) && (local_enuPin < GPIO_PIN_LAST))
+            {
+                /* Get the level of the Pin */
+                *local_enuPinLevel = (((GPIO_ARR[local_enuPort]->GPIO_IDR).reg) >> local_enuPin) & PIN_LEVEL_MASK;
+            }
+            else
+            {
+                error_State = STD_NOT_VALID_VALUE;
+            }
+        }
+        else
+        {
+            error_State = STD_INDEX_OUT_OF_RANGE;
+        }
+    }
+    else
+    {
+        error_State = STD_NULL_POINTER;
+    }
+    
+    return error_State;
 }
 
 /**
