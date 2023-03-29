@@ -2,7 +2,7 @@
  * @Author                : Islam Tarek<islamtarek0550@gmail.com>            *
  * @CreatedDate           : 2023-03-08 07:59:59                              *
  * @LastEditors           : Islam Tarek<islamtarek0550@gmail.com>            *
- * @LastEditDate          : 2023-03-14 00:02:05                              *
+ * @LastEditDate          : 2023-03-29 17:37:43                              *
  * @FilePath              : RCC_priv.h                                       *
  * @CopyRight             : Islam Tarek CopyRight                            *
  ****************************************************************************/
@@ -347,7 +347,7 @@ typedef struct
 /**
  * @brief Mapping of RCC registers structure to memory.
  */
-#define RCC_REG     ((volatile RCC_reg_t *)(RCC_BASE))
+#define RCC_REG     ((RCC_reg_t *)(RCC_BASE))
 
 /**
  * @brief Limits of AHB Bus Peripherals
