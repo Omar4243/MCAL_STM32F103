@@ -231,4 +231,26 @@ std_errorStatus_t GPIO_set_pin_speed(gpio_port_t local_enuPort, gpio_pin_t local
  */
 std_errorStatus_t GPIO_toggle_pin_level(gpio_port_t local_enuPort, gpio_pin_t local_enuPin)
 {
+    std_errorStatus_t error_state = STD_OK;
+
+    /* Check if the port exists */
+    if((local_enuPort >= GPIO_A) && (local_enuPort < GPIO_LAST))
+    {
+        /* Check if the Pin exists */
+        if((local_enuPin >= GPIO_PIN_0) && (local_enuPin < GPIO_PIN_LAST))
+        {
+            /* Toggle the pin level */
+            ((GPIO_ARR[local_enuPort] -> GPIO_ODR).reg) ^= (PIN_LEVEL_MASK << local_enuPin);
+        }
+        else
+        {
+            error_state = STD_NOT_VALID_VALUE;
+        }
+    }
+    else
+    {
+        error_state = STD_INDEX_OUT_OF_RANGE;
+    }
+
+    return error_state;
 }
