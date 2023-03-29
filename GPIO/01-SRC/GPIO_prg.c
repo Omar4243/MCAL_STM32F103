@@ -69,7 +69,7 @@ std_errorStatus_t GPIO_set_pin_mode(gpio_port_t local_enuPort, gpio_pin_t local_
     {
         /* Enable GPIO clock */
         error_state = RCC_enable_peripheral_clk((local_enuPort + PORT_TO_PERIPHERAL));
-        
+
         /* Set Pin Mode */
         if ((local_enuPinMode >= GPIO_PIN_MODE_AN_INPUT) && (local_enuPinMode < GPIO_PIN_MODE_LAST))
         {
@@ -132,6 +132,36 @@ std_errorStatus_t GPIO_set_pin_mode(gpio_port_t local_enuPort, gpio_pin_t local_
  */
 std_errorStatus_t GPIO_set_pin_level(gpio_port_t local_enuPort, gpio_pin_t local_enuPin, gpio_pin_level_t local_enuPinLevel)
 {
+    std_errorStatus_t error_state = STD_OK;
+
+    /* Check if the Port exists or not */
+    if((local_enuPort >= GPIO_A) && (local_enuPort < GPIO_LAST))
+    {
+        /* Check if the Pin exists or not */
+        if((local_enuPin >= GPIO_PIN_0) && (local_enuPin < GPIO_PIN_LAST))
+        {
+            /* Check if the level is valid or not */
+            if((local_enuPinLevel == GPIO_PIN_LOW) || (local_enuPinLevel == GPIO_PIN_LOW))
+            {
+                /* Clear Pin previous level */
+                ((GPIO_ARR[local_enuPort] -> GPIO_ODR).reg) &= ~(PIN_LEVEL_MASK << local_enuPin);
+                /* Set Pin level */
+                ((GPIO_ARR[local_enuPort] -> GPIO_ODR).reg) |= (local_enuPinLevel << local_enuPin);
+            }
+            else
+            {
+                error_state = STD_NOT_VALID_VALUE;
+            }
+        }
+        else
+        {
+            error_state = STD_NOT_VALID_VALUE;
+        }
+    }
+    else
+    {
+        error_state = STD_INDEX_OUT_OF_RANGE;
+    }
 }
 
 /**
