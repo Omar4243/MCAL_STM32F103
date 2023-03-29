@@ -2,9 +2,9 @@
  * @Author                : Islam Tarek<islamtarek0550@gmail.com>            *
  * @CreatedDate           : 2023-03-28 09:34:28                              *
  * @LastEditors           : Islam Tarek<islamtarek0550@gmail.com>            *
- * @LastEditDate          : 2023-03-28 09:34:28                              *
+ * @LastEditDate          : 2023-03-29 21:48:35                              *
  * @FilePath              : GPIO_priv.h                                      *
- * @CopyRight             : Islam Tarek CopyRight                            *
+ * @CopyRight             : copyright                                        *
  ****************************************************************************/
 
 #ifndef GPIO_PRIV_H_
@@ -269,11 +269,9 @@ typedef struct
 /**
  * @brief Mapping of GPIO Registers to memory.
  */
-#define GPIO_A_REG      ((volatile GPIO_reg_t *)(GPIOA_BASE))
-#define GPIO_B_REG      ((volatile GPIO_reg_t *)(GPIOB_BASE))
-#define GPIO_C_REG      ((volatile GPIO_reg_t *)(GPIOC_BASE))
-#define GPIO_D_REG      ((volatile GPIO_reg_t *)(GPIOD_BASE))
-#define GPIO_E_REG      ((volatile GPIO_reg_t *)(GPIOE_BASE))
+#define GPIO_A_REG      ((GPIO_reg_t *)(GPIOA_BASE))
+#define GPIO_B_REG      ((GPIO_reg_t *)(GPIOB_BASE))
+#define GPIO_C_REG      ((GPIO_reg_t *)(GPIOC_BASE))
 
 /**
  * @brief Map GPIO Port number to GPIO Peripheral number 
@@ -284,7 +282,7 @@ typedef struct
  * @brief Map Pin number to its configuration bits
  */
 #define PIN_CFG_SHIFT           4U
-
+#define GPIO_PIN_DIFF           8U
 /**
  * @brief GPIO Pin  masks
  */

@@ -2,9 +2,9 @@
  * @Author                : Islam Tarek<islamtarek0550@gmail.com>            *
  * @CreatedDate           : 2023-03-28 09:34:18                              *
  * @LastEditors           : Islam Tarek<islamtarek0550@gmail.com>            *
- * @LastEditDate          : 2023-03-28 09:34:18                              *
+ * @LastEditDate          : 2023-03-29 17:51:09                              *
  * @FilePath              : GPIO_int.h                                       *
- * @CopyRight             : Islam Tarek CopyRight                            *
+ * @CopyRight             : copyright                                        *
  ****************************************************************************/
 
 /**
@@ -26,8 +26,6 @@ typedef enum
     GPIO_A = (u8) 0 ,
     GPIO_B          ,
     GPIO_C          ,
-    GPIO_D          ,
-    GPIO_E          ,
     GPIO_LAST
 }gpio_port_t;
 
@@ -105,10 +103,9 @@ typedef enum
  * @section APIs
 */
 
-std_errorStatus_t GPIO_init             (void);
+void GPIO_init                          (void);
 std_errorStatus_t GPIO_set_pin_mode     (gpio_port_t local_enuPort, gpio_pin_t local_enuPin, gpio_pin_mode_t local_enuPinMode);
 std_errorStatus_t GPIO_set_pin_level    (gpio_port_t local_enuPort, gpio_pin_t local_enuPin, gpio_pin_level_t local_enuPinLevel);
 std_errorStatus_t GPIO_get_pin_level    (gpio_port_t local_enuPort, gpio_pin_t local_enuPin, gpio_pin_level_t* local_enuPinLevel);
-std_errorStatus_t GPIO_set_pin_speed    (gpio_port_t local_enuPort, gpio_pin_t local_enuPin, gpio_pin_speed_t local_enuPinSpeed);
 std_errorStatus_t GPIO_toggle_pin_level (gpio_port_t local_enuPort, gpio_pin_t local_enuPin);
 

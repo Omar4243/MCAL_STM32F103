@@ -2,9 +2,9 @@
  * @Author                : Islam Tarek<islamtarek0550@gmail.com>            *
  * @CreatedDate           : 2023-03-28 09:34:24                              *
  * @LastEditors           : Islam Tarek<islamtarek0550@gmail.com>            *
- * @LastEditDate          : 2023-03-28 09:34:25                              *
+ * @LastEditDate          : 2023-03-29 22:27:18                              *
  * @FilePath              : GPIO_prg.c                                       *
- * @CopyRight             : Islam Tarek CopyRight                            *
+ * @CopyRight             : copyright                                        *
  ****************************************************************************/
 
 /**
@@ -26,8 +26,7 @@ static GPIO_reg_t *GPIO_ARR[GPIO_LAST] =
         GPIO_A_REG,
         GPIO_B_REG,
         GPIO_C_REG,
-        GPIO_D_REG,
-        GPIO_E_REG};
+    };
 
 /**
  * @section APIs Implementation
@@ -37,7 +36,7 @@ static GPIO_reg_t *GPIO_ARR[GPIO_LAST] =
  * @brief This API is used for GPIO Initialization
  * @return Error state which describes the state of API (Passed or failed).
  */
-std_errorStatus_t GPIO_init(void)
+void GPIO_init(void)
 {
 }
 
@@ -71,7 +70,7 @@ std_errorStatus_t GPIO_set_pin_mode(gpio_port_t local_enuPort, gpio_pin_t local_
         error_state = RCC_enable_peripheral_clk((local_enuPort + PORT_TO_PERIPHERAL));
 
         /* Set Pin Mode */
-        if ((local_enuPinMode >= GPIO_PIN_MODE_AN_INPUT) && (local_enuPinMode < GPIO_PIN_MODE_LAST))
+        if (((local_enuPinMode >= GPIO_PIN_MODE_AN_INPUT) && (local_enuPinMode < GPIO_PIN_MODE_LAST)) || (local_enuPinMode == GPIO_PIN_MODE_PU_INPUT))
         {
             /* Check if the mode is Pull-up or not */
             if (local_enuPinMode == GPIO_PIN_MODE_PU_INPUT)
@@ -98,9 +97,9 @@ std_errorStatus_t GPIO_set_pin_mode(gpio_port_t local_enuPort, gpio_pin_t local_
             else if (local_enuPin >= GPIO_PIN_8 && local_enuPin < GPIO_PIN_LAST)
             {
                 /* Clear Pin previous configuration */
-                ((GPIO_ARR[local_enuPort]->GPIO_CRH).reg) &= ~(PIN_CFG_MASK << (local_enuPin * PIN_CFG_SHIFT));
+                ((GPIO_ARR[local_enuPort]->GPIO_CRH).reg) &= ~(PIN_CFG_MASK << ((local_enuPin - GPIO_PIN_DIFF)* PIN_CFG_SHIFT));
                 /* Set Pin configuration */
-                ((GPIO_ARR[local_enuPort]->GPIO_CRH).reg) |= (local_enuPinMode << (local_enuPin * PIN_CFG_SHIFT));
+                ((GPIO_ARR[local_enuPort]->GPIO_CRH).reg) |= (local_enuPinMode << ((local_enuPin - GPIO_PIN_DIFF) * PIN_CFG_SHIFT));
             }
             else
             {
@@ -141,7 +140,7 @@ std_errorStatus_t GPIO_set_pin_level(gpio_port_t local_enuPort, gpio_pin_t local
         if((local_enuPin >= GPIO_PIN_0) && (local_enuPin < GPIO_PIN_LAST))
         {
             /* Check if the level is valid or not */
-            if((local_enuPinLevel == GPIO_PIN_LOW) || (local_enuPinLevel == GPIO_PIN_LOW))
+            if((local_enuPinLevel == GPIO_PIN_LOW) || (local_enuPinLevel == GPIO_PIN_HIGH))
             {
                 /* Clear Pin previous level */
                 ((GPIO_ARR[local_enuPort] -> GPIO_ODR).reg) &= ~(PIN_LEVEL_MASK << local_enuPin);
@@ -162,6 +161,8 @@ std_errorStatus_t GPIO_set_pin_level(gpio_port_t local_enuPort, gpio_pin_t local
     {
         error_state = STD_INDEX_OUT_OF_RANGE;
     }
+    
+    return error_state;
 }
 
 /**
@@ -206,21 +207,6 @@ std_errorStatus_t GPIO_get_pin_level(gpio_port_t local_enuPort, gpio_pin_t local
     }
     
     return error_State;
-}
-
-/**
- * @brief This API is used to set the Pin max output speed.
- * @note Output Speeds are:
- * @note GPIO_PIN_MAX_OUTPUT_SPEED_2MHZ
- * @note GPIO_PIN_MAX_OUTPUT_SPEED_10MHZ
- * @note GPIO_PIN_MAX_OUTPUT_SPEED_50MHZ
- * @param local_enuPort is the Port whose pin level will be got (GPIO_x, x: (A -> E)).
- * @param local_enuPin is the pin whose level will be got (GPIO_PIN_x, x: (0 -> 15)).
- * @param local_enuPinSpeed is the speed to which the Pin output speed will be set.
- * @return Error state which describes the state of API (Passed or failed).
- */
-std_errorStatus_t GPIO_set_pin_speed(gpio_port_t local_enuPort, gpio_pin_t local_enuPin, gpio_pin_speed_t local_enuPinSpeed)
-{
 }
 
 /**
