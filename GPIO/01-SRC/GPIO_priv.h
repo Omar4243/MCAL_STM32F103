@@ -286,10 +286,10 @@ typedef struct
 #define PIN_CFG_SHIFT           4U
 
 /**
- * @brief Pin Configuration mask
+ * @brief GPIO Pin  masks
  */
-#define PIN_CFG_MASK            0x0000000F
-
+#define PIN_CFG_MASK            0x0000000F  /* Pin configuration mask */
+#define PIN_LEVEL_MASK          0x00000001  /* Pin level mask */
 /**
  * @brief Reset Values
  */
