@@ -59,6 +59,65 @@ std_errorStatus_t GPIO_init(void)
  */
 std_errorStatus_t GPIO_set_pin_mode(gpio_port_t local_enuPort, gpio_pin_t local_enuPin, gpio_pin_mode_t local_enuPinMode)
 {
+    std_errorStatus_t error_state = STD_OK;
+
+    /* Initialize ODR register by zeros */
+    (GPIO_ARR[local_enuPort]->GPIO_ODR).reg = RESET_BY_ZERO;
+
+    /* Check if the Port exists or not */
+    if ((local_enuPort >= GPIO_A) && (local_enuPort < GPIO_LAST))
+    {
+        /* Enable GPIO clock */
+        error_state = RCC_enable_peripheral_clk((local_enuPort + PORT_TO_PERIPHERAL));
+        
+        /* Set Pin Mode */
+        if ((local_enuPinMode >= GPIO_PIN_MODE_AN_INPUT) && (local_enuPinMode < GPIO_PIN_MODE_LAST))
+        {
+            /* Check if the mode is Pull-up or not */
+            if (local_enuPinMode == GPIO_PIN_MODE_PU_INPUT)
+            {
+                /* Set ODR Bit */
+                ((GPIO_ARR[local_enuPort]->GPIO_ODR).reg) |= (HIGH << local_enuPin);
+
+                /* Update Mode value */
+                local_enuPinMode = GPIO_PIN_MODE_PD_INPUT;
+            }
+            else
+            {
+                /* Do Nothing */
+            }
+
+            /* Configure the Pin mode */
+            if (local_enuPin >= GPIO_PIN_0 && local_enuPin <= GPIO_PIN_7)
+            {
+                /* Clear Pin previous configuration */
+                ((GPIO_ARR[local_enuPort]->GPIO_CRL).reg) &= ~(PIN_CFG_MASK << (local_enuPin * PIN_CFG_SHIFT));
+                /* Set Pin configuration */
+                ((GPIO_ARR[local_enuPort]->GPIO_CRL).reg) |= (local_enuPinMode << (local_enuPin * PIN_CFG_SHIFT));
+            }
+            else if (local_enuPin >= GPIO_PIN_8 && local_enuPin < GPIO_PIN_LAST)
+            {
+                /* Clear Pin previous configuration */
+                ((GPIO_ARR[local_enuPort]->GPIO_CRH).reg) &= ~(PIN_CFG_MASK << (local_enuPin * PIN_CFG_SHIFT));
+                /* Set Pin configuration */
+                ((GPIO_ARR[local_enuPort]->GPIO_CRH).reg) |= (local_enuPinMode << (local_enuPin * PIN_CFG_SHIFT));
+            }
+            else
+            {
+                error_state = STD_NOT_VALID_VALUE;
+            }
+        }
+        else
+        {
+            error_state = STD_NOT_VALID_VALUE;
+        }
+    }
+    else
+    {
+        error_state = STD_INDEX_OUT_OF_RANGE;
+    }
+
+    return error_state;
 }
 
 /**
