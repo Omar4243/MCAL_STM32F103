@@ -8,12 +8,16 @@
  ****************************************************************************/
 
 /**
- * @brief  Includes Section
- */
+ * @section Includes
+*/
 
 #include "RCC_priv.h"
 #include "RCC_cfg.h"
 #include "RCC_int.h"
+
+/**
+ * @section APIs Implementation
+*/
 
 /**
  * @brief  This API is used to initialize RCC driver with the given configurations.
@@ -140,7 +144,7 @@ std_errorStatus_t RCC_init(void)
  * @param local_enuPeripheral The peripheral whose clock will be enabled.
  * @return Error state which describes the state of API (Passed or failed).
  */
-std_errorStatus_t RCC_enable_peripheral_clk (peripheral_t local_enuPeripheral)
+std_errorStatus_t RCC_enable_peripheral_clk (RCC_peripheral_t local_enuPeripheral)
 {
     std_errorStatus_t error_state = STD_OK;
     /* Check peripheral belongs to which bus */
@@ -173,7 +177,7 @@ std_errorStatus_t RCC_enable_peripheral_clk (peripheral_t local_enuPeripheral)
  * @param local_enuPeripheral The peripheral whose clock will be disabled.
  * @return Error state which describes the state of API (Passed or failed). 
  */
-std_errorStatus_t RCC_disable_peripheral_clk(peripheral_t local_enuPeripheral)
+std_errorStatus_t RCC_disable_peripheral_clk(RCC_peripheral_t local_enuPeripheral)
 {
     std_errorStatus_t error_state = STD_OK;
     /* Check peripheral belongs to which bus */
@@ -206,7 +210,7 @@ std_errorStatus_t RCC_disable_peripheral_clk(peripheral_t local_enuPeripheral)
  * @param local_enuPeripheral The peripheral which will be reset.
  * @return Error state which describes the state of API (Passed or failed). 
  */
-std_errorStatus_t RCC_reset_peripheral(peripheral_t local_enuPeripheral)
+std_errorStatus_t RCC_reset_peripheral(RCC_peripheral_t local_enuPeripheral)
 {
     std_errorStatus_t error_state = STD_OK;
     /* Check peripheral belongs to which bus */

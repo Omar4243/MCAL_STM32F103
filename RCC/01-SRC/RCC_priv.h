@@ -11,14 +11,14 @@
 #define RCC_PRIV_H_
 
 /**
-* @brief Includes Section
+* @section Includes
 */
+
 #include "std_type.h"
 
 /**
- * @brief RCC Registers Base Address.
- */
-#define RCC_BASE                0x40021000
+ * @section Typedefs
+*/
 
 /**
  * @brief RCC Clock Control Register and Its bits.
@@ -323,17 +323,26 @@ typedef union
  */
 typedef struct 
 {
-    RCC_CR_t        RCC_CR;
-    RCC_CFGR_t      RCC_CFGR;
-    RCC_CIR_t       RCC_CIR;
-    RCC_APB2RSTR_t  RCC_APB2RSTR;
-    RCC_APB1RSTR_t  RCC_APB1RSTR;
-    RCC_AHBENR_t    RCC_AHBENR;
-    RCC_APB2ENR_t   RCC_APB2ENR;
-    RCC_APB1ENR_t   RCC_APB1ENR;
-    RCC_BDCR_t      RCC_BDCR;
-    RCC_CSR_t       RCC_CSR;
+    volatile RCC_CR_t        RCC_CR;
+    volatile RCC_CFGR_t      RCC_CFGR;
+    volatile RCC_CIR_t       RCC_CIR;
+    volatile RCC_APB2RSTR_t  RCC_APB2RSTR;
+    volatile RCC_APB1RSTR_t  RCC_APB1RSTR;
+    volatile RCC_AHBENR_t    RCC_AHBENR;
+    volatile RCC_APB2ENR_t   RCC_APB2ENR;
+    volatile RCC_APB1ENR_t   RCC_APB1ENR;
+    volatile RCC_BDCR_t      RCC_BDCR;
+    volatile RCC_CSR_t       RCC_CSR;
 }RCC_reg_t;
+
+/**
+ * @section Definitions 
+*/
+
+/**
+ * @brief RCC Registers Base Address.
+ */
+#define RCC_BASE                0x40021000
 
 /**
  * @brief Mapping of RCC registers structure to memory.

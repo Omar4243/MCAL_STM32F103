@@ -10,9 +10,9 @@
 #ifndef RCC_CFG_H_
 #define RCC_CFG_H_
 
-/*********************************************************************************************/
-/*                                      Options Section                                      */
-/*********************************************************************************************/
+/**
+ * @section Options
+*/
 
 /**
  * @brief Clock Source options
@@ -120,9 +120,9 @@
 #define PCLK2_DIV_BY_8   3U  /* ADC Clock will be APB2 Clock / 8 */
 
 
-/*********************************************************************************************/
-/*                                  Configuration Section                                    */
-/*********************************************************************************************/
+/**
+ * @section Configurations
+*/
 
 /**
  * @brief System Clock Configuration
@@ -210,4 +210,4 @@
 
 #define ADC_CLK_PRESCALER       PCLK2_DIV_BY_2
 
-#endif 
+#endif
