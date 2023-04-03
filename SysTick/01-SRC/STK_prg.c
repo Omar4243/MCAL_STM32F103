@@ -2,7 +2,7 @@
  * @Author                : Islam Tarek<islam.tarek@valeo.com>               *
  * @CreatedDate           : 2023-04-01 23:11:23                              *
  * @LastEditors           : Islam Tarek<islam.tarek@valeo.com>               *
- * @LastEditDate          : 2023-04-03 22:48:58                              *
+ * @LastEditDate          : 2023-04-03 22:52:09                              *
  * @FilePath              : STK_prg.c                                        *
  ****************************************************************************/
 
@@ -63,18 +63,16 @@ std_errorStatus_t STK_set_period_us(u32 local_u32Pertiod)
 
 /**
  * @brief This API is used to enable SysTick.
- * @return Error state which describes the state of API (Passed or failed). 
  */
-std_errorStatus_t STK_start(void)
+void STK_start(void)
 {
 
 }
 
 /**
  * @brief This API is used to disable SysTick.
- * @return Error state which describes the state of API (Passed or failed).
  */
-std_errorStatus_t STK_stop(void)
+void STK_stop(void)
 {
 
 }
