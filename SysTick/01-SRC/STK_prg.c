@@ -2,7 +2,7 @@
  * @Author                : Islam Tarek<islam.tarek@valeo.com>               *
  * @CreatedDate           : 2023-04-01 23:11:23                              *
  * @LastEditors           : Islam Tarek<islam.tarek@valeo.com>               *
- * @LastEditDate          : 2023-04-03 22:52:09                              *
+ * @LastEditDate          : 2023-04-03 22:54:55                              *
  * @FilePath              : STK_prg.c                                        *
  ****************************************************************************/
 
@@ -66,7 +66,8 @@ std_errorStatus_t STK_set_period_us(u32 local_u32Pertiod)
  */
 void STK_start(void)
 {
-
+    /* Enable SysTick */
+    ((STK_REG -> STK_CTRL).bits.ENABLE) = STK_COUNTER_ENABLE;
 }
 
 /**
@@ -74,7 +75,8 @@ void STK_start(void)
  */
 void STK_stop(void)
 {
-
+    /* Disable SysTick */
+    ((STK_REG -> STK_CTRL).bits.ENABLE) = STK_COUNTER_DISABLE;
 }
 
 /**
