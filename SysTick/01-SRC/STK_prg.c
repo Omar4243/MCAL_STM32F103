@@ -2,7 +2,7 @@
  * @Author                : Islam Tarek<islam.tarek@valeo.com>               *
  * @CreatedDate           : 2023-04-01 23:11:23                              *
  * @LastEditors           : Islam Tarek<islam.tarek@valeo.com>               *
- * @LastEditDate          : 2023-04-03 22:54:55                              *
+ * @LastEditDate          : 2023-04-03 23:02:47                              *
  * @FilePath              : STK_prg.c                                        *
  ****************************************************************************/
 
@@ -20,7 +20,7 @@
 /**
  * @brief Global Pointer to function
  */
-static void (*ISR_FUNC)(void) = STD_NULL;
+static void (*STK_ISR_FUNC)(void) = STD_NULL;
 
 /**
  * @section APIs Implementation
@@ -84,7 +84,20 @@ void STK_stop(void)
  * @param local_cb_func is a pointer to function which will be used as ISR function.
  * @return Error state which describes the state of API (Passed or failed). 
  */
-std_errorStatus_t STK_set_callback_function (void(*local_cb_func)(void))
+std_errorStatus_t STK_set_callback_function(void(*local_cb_func)(void))
 {
-    
+    std_errorStatus_t error_state = STD_OK;
+
+    /* Check that the pointer doesn't point to NULL */
+    if(local_cb_func != STD_NULL)
+    {
+        /* Set the ISR function poiter by the local function pointer */
+        STK_ISR_FUNC = local_cb_func;
+    }
+    else
+    {
+        error_state = STD_NULL_POINTER;
+    }
+
+    return error_state;
 }
