@@ -56,11 +56,27 @@ std_errorStatus_t STK_init(void)
  * @param local_u32Pertiod is the period in micor seconds at which action will be taken.
  * @param local_u32Clk_KHZ is the SysTick clock in KHz.
  * @return Error state which describes the state of API (Passed or failed). 
- * @note The result of (local_u32Pertiod * local_u32Clk_KHZ) must not exceed the value 0x00FFFFFF.
+ * @note The result of ((local_u32Pertiod * local_u32Clk_KHZ) / 1000) must not exceed the value 0x00FFFFFF.
  */
 std_errorStatus_t STK_set_period_us(u32 local_u32Clk_KHZ, u32 local_u32Pertiod)
 {
-     
+    std_errorStatus_t error_state = STD_OK;
+
+    /* Calculate the Load Value */
+    u64 STK_u32Load_Value = (((u64)(local_u32Clk_KHZ * (u64)local_u32Pertiod)) / CONVERT_FROM_MS_TO_US);
+    
+    /* Check if the calculated load Value in the accepted range of the load register or not */
+    if( STK_u32Load_Value <= LOAD_REG_MAX_VALUE)
+    {
+        /* Update the load register */
+        ((STK_REG -> STK_LOAD).bits.RELOAD) = STK_u32Load_Value;
+    }
+    else
+    {
+        error_state = STD_NOT_VALID_VALUE;
+    }
+
+    return error_state;
 }
 
 /**
