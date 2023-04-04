@@ -108,5 +108,14 @@ typedef struct
 #define STK_COUNTER_DISABLE         0U  /* Disable SysTick */
 #define STK_COUNTER_ENABLE          1U  /* Enable Systick  */
 
+/**
+ * @brief Convert from milli seconds to micro seconds
+ */
+#define CONVERT_FROM_MS_TO_US       1000
+
+/**
+ * @brief Limit of Load register 
+ */
+#define LOAD_REG_MAX_VALUE          0x00FFFFFF
 
 #endif
