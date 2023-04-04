@@ -2,7 +2,7 @@
  * @Author                : Islam Tarek<islam.tarek@valeo.com>               *
  * @CreatedDate           : 2023-04-01 23:11:23                              *
  * @LastEditors           : Islam Tarek<islam.tarek@valeo.com>               *
- * @LastEditDate          : 2023-04-03 23:02:47                              *
+ * @LastEditDate          : 2023-04-04 13:53:56                              *
  * @FilePath              : STK_prg.c                                        *
  ****************************************************************************/
 
@@ -54,11 +54,13 @@ std_errorStatus_t STK_init(void)
 /**
  * @brief This API is used to set the period in micro seconds.
  * @param local_u32Pertiod is the period in micor seconds at which action will be taken.
+ * @param local_u32Clk_KHZ is the SysTick clock in KHz.
  * @return Error state which describes the state of API (Passed or failed). 
+ * @note The result of (local_u32Pertiod * local_u32Clk_KHZ) must not exceed the value 0x00FFFFFF.
  */
-std_errorStatus_t STK_set_period_us(u32 local_u32Pertiod)
+std_errorStatus_t STK_set_period_us(u32 local_u32Clk_KHZ, u32 local_u32Pertiod)
 {
-
+     
 }
 
 /**
