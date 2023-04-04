@@ -1,10 +1,9 @@
 /*****************************************************************************
- * @Author                : Islam Tarek<islamtarek0550@gmail.com>            *
+ * @Author                : Islam Tarek<islam.tarek@valeo.com>               *
  * @CreatedDate           : 2023-03-28 09:34:28                              *
- * @LastEditors           : Islam Tarek<islamtarek0550@gmail.com>            *
- * @LastEditDate          : 2023-03-29 21:48:35                              *
+ * @LastEditors           : Islam Tarek<islam.tarek@valeo.com>               *
+ * @LastEditDate          : 2023-04-03 21:54:04                              *
  * @FilePath              : GPIO_priv.h                                      *
- * @CopyRight             : copyright                                        *
  ****************************************************************************/
 
 #ifndef GPIO_PRIV_H_
@@ -239,7 +238,7 @@ typedef union
 }GPIO_LCKR_t;
 
 /**
- * @brief GPIO Registers Struture
+ * @brief GPIO Registers Structure.
  */
 typedef struct 
 {
