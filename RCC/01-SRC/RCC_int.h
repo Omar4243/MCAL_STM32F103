@@ -61,7 +61,7 @@ typedef struct
 {
     u32 SYS_clk_KHZ;
     u32 AHB_clk_KHZ;
-    u16 APB1_clk_KHZ;
+    u32 APB1_clk_KHZ;
     u32 APB2_clk_KHZ;
 }RCC_clk_t;
 
