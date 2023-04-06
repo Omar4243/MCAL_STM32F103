@@ -394,11 +394,24 @@ typedef struct
 /**
  * @brief PLL Multiplication Mapping Values
  */
+
 #define PLL_MUL_MAP_VAL_1         1U
 #define PLL_MUL_MAP_VAL_2         2U
 
 /**
  * @brief PLL Multiplication Validate End
  */
+
 #define PLL_MUL_END_VALIDATE        1U
+
+/**
+ * @brief Maximum clock values
+ */
+
+#define SYS_CLK_MAX_KHZ             72000UL
+#define AHB_CLK_MAX_KHZ             72000UL
+#define APB2_CLK_MAX_KHZ            72000UL
+#define APB1_CLK_MAX_KHZ            36000UL
+
+
 #endif
