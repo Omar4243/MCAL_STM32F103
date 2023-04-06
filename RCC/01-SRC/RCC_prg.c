@@ -16,6 +16,16 @@
 #include "RCC_int.h"
 
 /**
+ * @section Global Variables
+ */
+
+/**
+ * @brief Pointer to clock structure 
+ */
+
+RCC_clk_t* CLK_VALUE = STD_NULL;
+
+/**
  * @section APIs Implementation
 */
 
@@ -42,6 +52,8 @@ std_errorStatus_t RCC_init(void)
         #if SYSCLK_SRC == HSI
             /* Turn HSI oscillator on */
             RCC_REG->RCC_CR.bits.HSION = OSC_ON;
+            /* Update source clock value */
+            CLK_VALUE -> SYS_clk_KHZ = RCC_8_MHZ;
             /* Turn other oscillators off */
             RCC_REG->RCC_CR.bits.HSEON = OSC_OFF;
             RCC_REG->RCC_CR.bits.PLLON = OSC_OFF;
@@ -50,6 +62,29 @@ std_errorStatus_t RCC_init(void)
         #elif SYSCLK_SRC == HSE
             /* Set HSE clock source */
             RCC_REG -> RCC_CR.bits.HSEBYP = HSE_CLK_SRC;
+            #if (HSE_CLK_SRC == HSE_NOT_BYPASS)
+                /* Check that the clock is in the available range for not bypass clock or not */
+                #if(HSE_CLK_VAL_KHZ >= RCC_4_MHZ && HSE_CLK_VAL_KHZ <= RCC_16_MHZ)
+                    /* Update source clock value */
+                    CLK_VALUE -> SYS_clk_KHZ = HSE_CLK_VAL_KHZ;
+                #else
+                    /* Option doesn't exist */
+                    error_state = STD_NOT_VALID_VALUE;  
+                #endif
+            #elif (HSE_CLK_SRC == HSE_BYPASS)
+                /* Check that the clock is in the available range for not bypass clock or not */
+                #if(HSE_CLK_VAL_KHZ >= RCC_4_MHZ && HSE_CLK_VAL_KHZ <= RCC_25_MHZ)
+                    /* Update source clock value */
+                    CLK_VALUE -> SYS_clk_KHZ = HSE_CLK_VAL_KHZ;
+                #else
+                    /* Option doesn't exist */
+                    error_state = STD_NOT_VALID_VALUE;  
+                #endif
+            #else
+                /* Option doesn't exist */
+                error_state = STD_NOT_VALID_VALUE; 
+            #endif
+
             /* Turn HSE oscillator on */
             RCC_REG -> RCC_CR.bits.HSEON = OSC_ON;
             /* Turn other oscillators off */
@@ -59,17 +94,37 @@ std_errorStatus_t RCC_init(void)
             /* Wait until the HSE oscillator is ready */
             while(!(RCC_REG -> RCC_CR.bits.HSERDY));
         #else 
-            /* Set PLL clock Source */
-            #if(PLL_CLK_SRC == HSI_CLK_DIV_BY_2 || PLL_CLK_SRC == HSE_CLK || PLL_CLK_SRC == HSE_CLK_DIV_BY_2)
+            #if(PLL_CLK_SRC == HSI_CLK_DIV_BY_2)
+                /* Set PLL clock Source */
                 RCC_REG -> RCC_CFGR.bits.PLLSRC = PLL_CLK_SRC;
+                /* Update source clock value */
+                CLK_VALUE -> SYS_clk_KHZ = RCC_4_MHZ;
+            #elif(PLL_CLK_SRC == HSE_CLK)
+                /* Set PLL clock Source */
+                RCC_REG -> RCC_CFGR.bits.PLLSRC = PLL_CLK_SRC;
+                /* Update source clock value */
+                CLK_VALUE -> SYS_clk_KHZ = HSE_CLK_VAL_KHZ;
+            #elif(PLL_CLK_SRC == HSE_CLK_DIV_BY_2)
+                /* Set PLL clock Source */
+                RCC_REG -> RCC_CFGR.bits.PLLSRC = PLL_CLK_SRC;
+                /* Update source clock value */
+                CLK_VALUE -> SYS_clk_KHZ = HSE_CLK_VAL_KHZ >> DIV_BY_2;
             #else
                 /* Option doesn't exist */
-                error_state = STD_NOT_VALID_VALUE;  
+                error_state = STD_NOT_VALID_VALUE; 
             #endif 
             
-            /* Set PLL multiplication factor */
+            /* Check if multiplication factor is in range or not */
             #if(PLL_MUL_FACTOR >= PLL_CLK_MUL_BY_2 && PLL_MUL_FACTOR <= PLL_CLK_MUL_BY_16)
+                /* Set PLL multiplication factor */
                 RCC_REG -> RCC_CFGR.bits.PLLMUL = PLL_MUL_FACTOR;
+                /* Update source clock value */
+                CLK_VALUE -> SYS_clk_KHZ *= (PLL_MUL_FACTOR + PLL_MUL_MAP_VAL_2);
+            #elif(PLL_MUL_FACTOR == (PLL_CLK_MUL_BY_16 + PLL_MUL_END_VALIDATE))
+                /* Set PLL multiplication factor */
+                RCC_REG -> RCC_CFGR.bits.PLLMUL = PLL_MUL_FACTOR;
+                /* Update source clock value */
+                CLK_VALUE -> SYS_clk_KHZ *= (PLL_MUL_FACTOR + PLL_MUL_MAP_VAL_1);
             #else
                 /* Option doesn't exist */
                 error_state = STD_NOT_VALID_VALUE;  
@@ -88,25 +143,114 @@ std_errorStatus_t RCC_init(void)
         error_state = STD_NOT_VALID_VALUE;
     #endif
     
-    /* Set AHB clock pre_scaler */
-    # if(AHB_CLK_PRESCALER >= SYSCLK && AHB_CLK_PRESCALER <= SYSCLK_DIV_BY_512)
+    /* Cheeck if AHB clock pre_scaler is accepted or not */
+    # if(AHB_CLK_PRESCALER == SYSCLK)
+        /* Set AHB clock Pre-scler */
         RCC_REG -> RCC_CFGR.bits.HPRE = AHB_CLK_PRESCALER;
+        /* Update AHB clock value */
+        CLK_VALUE -> AHB_clk_KHZ = CLK_VALUE ->SYS_clk_KHZ;
+    #elif(AHB_CLK_PRESCALER == SYSCLK_DIV_BY_2)
+        /* Set AHB clock Pre-scler */
+        RCC_REG -> RCC_CFGR.bits.HPRE = AHB_CLK_PRESCALER;
+        /* Update AHB clock value */
+        CLK_VALUE -> AHB_clk_KHZ = (CLK_VALUE ->SYS_clk_KHZ) >> DIV_BY_2;
+    #elif(AHB_CLK_PRESCALER == SYSCLK_DIV_BY_4)
+        /* Set AHB clock Pre-scler */
+        RCC_REG -> RCC_CFGR.bits.HPRE = AHB_CLK_PRESCALER;
+        /* Update AHB clock value */
+        CLK_VALUE -> AHB_clk_KHZ = (CLK_VALUE ->SYS_clk_KHZ) >> DIV_BY_4;
+    #elif(AHB_CLK_PRESCALER == SYSCLK_DIV_BY_8)
+        /* Set AHB clock Pre-scler */
+        RCC_REG -> RCC_CFGR.bits.HPRE = AHB_CLK_PRESCALER;
+        /* Update AHB clock value */
+        CLK_VALUE -> AHB_clk_KHZ = (CLK_VALUE ->SYS_clk_KHZ) >> DIV_BY_8;
+    #elif(AHB_CLK_PRESCALER == SYSCLK_DIV_BY_16)
+        /* Set AHB clock Pre-scler */
+        RCC_REG -> RCC_CFGR.bits.HPRE = AHB_CLK_PRESCALER;
+        /* Update AHB clock value */
+        CLK_VALUE -> AHB_clk_KHZ = (CLK_VALUE ->SYS_clk_KHZ) >> DIV_BY_16;
+    #elif(AHB_CLK_PRESCALER == SYSCLK_DIV_BY_64)
+        /* Set AHB clock Pre-scler */
+        RCC_REG -> RCC_CFGR.bits.HPRE = AHB_CLK_PRESCALER;
+        /* Update AHB clock value */
+        CLK_VALUE -> AHB_clk_KHZ = (CLK_VALUE ->SYS_clk_KHZ) >> DIV_BY_64;
+    #elif(AHB_CLK_PRESCALER == SYSCLK_DIV_BY_128)
+        /* Set AHB clock Pre-scler */
+        RCC_REG -> RCC_CFGR.bits.HPRE = AHB_CLK_PRESCALER;
+        /* Update AHB clock value */
+        CLK_VALUE -> AHB_clk_KHZ = (CLK_VALUE ->SYS_clk_KHZ) >> DIV_BY_128;
+    #elif(AHB_CLK_PRESCALER == SYSCLK_DIV_BY_256)
+        /* Set AHB clock Pre-scler */
+        RCC_REG -> RCC_CFGR.bits.HPRE = AHB_CLK_PRESCALER;
+        /* Update AHB clock value */
+        CLK_VALUE -> AHB_clk_KHZ = (CLK_VALUE ->SYS_clk_KHZ) >> DIV_BY_256;
+    #elif(AHB_CLK_PRESCALER == SYSCLK_DIV_BY_512)
+        /* Set AHB clock Pre-scler */
+        RCC_REG -> RCC_CFGR.bits.HPRE = AHB_CLK_PRESCALER;
+        /* Update AHB clock value */
+        CLK_VALUE -> AHB_clk_KHZ = (CLK_VALUE ->SYS_clk_KHZ) >> DIV_BY_512;
     #else
         /* Option doesn't exist */
         error_state = STD_NOT_VALID_VALUE;
     #endif
     
-    /* Set APB2 clock pre_scaler */
-    #if(APB2_CLK_PRESCALER >= HCLK && APB2_CLK_PRESCALER <= HCLK_DIV_BY_16 )
+    /* Check it sht APB2 clock pre-scaler is accepted or not */
+    #if(APB2_CLK_PRESCALER == HCLK)
+        /* Set APB2 clock pre_scaler */
         RCC_REG -> RCC_CFGR.bits.PPRE2 = APB2_CLK_PRESCALER;
+        /* Update APB2 clock value */
+        CLK_VALUE -> APB2_clk_KHZ = CLK_VALUE -> AHB_clk_KHZ;
+    #elif(APB2_CLK_PRESCALER == HCLK_DIV_BY_2)
+        /* Set APB2 clock pre_scaler */
+        RCC_REG -> RCC_CFGR.bits.PPRE2 = APB2_CLK_PRESCALER;
+        /* Update APB2 clock value */
+        CLK_VALUE -> APB2_clk_KHZ = (CLK_VALUE -> AHB_clk_KHZ) >>  DIV_BY_2;
+    #elif(APB2_CLK_PRESCALER == HCLK_DIV_BY_4)
+        /* Set APB2 clock pre_scaler */
+        RCC_REG -> RCC_CFGR.bits.PPRE2 = APB2_CLK_PRESCALER;
+        /* Update APB2 clock value */
+        CLK_VALUE -> APB2_clk_KHZ = (CLK_VALUE -> AHB_clk_KHZ) >>  DIV_BY_4;
+    #elif(APB2_CLK_PRESCALER == HCLK_DIV_BY_8)
+        /* Set APB2 clock pre_scaler */
+        RCC_REG -> RCC_CFGR.bits.PPRE2 = APB2_CLK_PRESCALER;
+        /* Update APB2 clock value */
+        CLK_VALUE -> APB2_clk_KHZ = (CLK_VALUE -> AHB_clk_KHZ) >>  DIV_BY_8;
+    #elif(APB2_CLK_PRESCALER == HCLK_DIV_BY_16)
+        /* Set APB2 clock pre_scaler */
+        RCC_REG -> RCC_CFGR.bits.PPRE2 = APB2_CLK_PRESCALER;
+        /* Update APB2 clock value */
+        CLK_VALUE -> APB2_clk_KHZ = (CLK_VALUE -> AHB_clk_KHZ) >>  DIV_BY_16;
     #else
         /* Option doesn't exist */
         error_state = STD_NOT_VALID_VALUE;
     #endif 
     
-    /* Set APB1 clock pre_scaler */
-    #if(APB1_CLK_PRESCALER >= HCLK && APB1_CLK_PRESCALER <= HCLK_DIV_BY_16 )
+    /* Check if APB1 clock pre_scaler is accepted or not */
+    #if(APB1_CLK_PRESCALER == HCLK)
+        /* Set APB1 clock pre_scaler */
         RCC_REG -> RCC_CFGR.bits.PPRE1 = APB1_CLK_PRESCALER;
+        /* Update APB1 clock value */
+        CLK_VALUE -> APB1_clk_KHZ = CLK_VALUE -> AHB_clk_KHZ;
+    #elif(APB1_CLK_PRESCALER == HCLK_DIV_BY_2)
+        /* Set APB1 clock pre_scaler */
+        RCC_REG -> RCC_CFGR.bits.PPRE1 = APB1_CLK_PRESCALER;
+        /* Update APB1 clock value */
+        CLK_VALUE -> APB1_clk_KHZ = (CLK_VALUE -> AHB_clk_KHZ) >> DIV_BY_2;
+    #elif(APB1_CLK_PRESCALER == HCLK_DIV_BY_4)
+        /* Set APB1 clock pre_scaler */
+        RCC_REG -> RCC_CFGR.bits.PPRE1 = APB1_CLK_PRESCALER;
+        /* Update APB1 clock value */
+        CLK_VALUE -> APB1_clk_KHZ = (CLK_VALUE -> AHB_clk_KHZ) >> DIV_BY_4;
+    #elif(APB1_CLK_PRESCALER == HCLK_DIV_BY_8)
+        /* Set APB1 clock pre_scaler */
+        RCC_REG -> RCC_CFGR.bits.PPRE1 = APB1_CLK_PRESCALER;
+        /* Update APB1 clock value */
+        CLK_VALUE -> APB1_clk_KHZ = (CLK_VALUE -> AHB_clk_KHZ) >> DIV_BY_8;
+    #elif(APB1_CLK_PRESCALER == HCLK_DIV_BY_16)
+        /* Set APB1 clock pre_scaler */
+        RCC_REG -> RCC_CFGR.bits.PPRE1 = APB1_CLK_PRESCALER;
+        /* Update APB1 clock value */
+        CLK_VALUE -> APB1_clk_KHZ = (CLK_VALUE -> AHB_clk_KHZ) >> DIV_BY_16;
     #else
         /* Option doesn't exist */
         error_state = STD_NOT_VALID_VALUE;
