@@ -21,7 +21,7 @@
 */
 
 std_errorStatus_t STK_init                  (void);
-std_errorStatus_t STK_set_period_us         (u32 local_u32Clk_KHZ, u32 local_u32Pertiod);
+std_errorStatus_t STK_set_period_us         (u32 local_u32Pertiod);
 void STK_start                              (void);
 void STK_stop                               (void);
 std_errorStatus_t STK_set_callback_function (void(*local_cb_func)(void));
