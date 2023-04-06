@@ -22,6 +22,34 @@
 #define HSE   1U  /* External High Speed Clock (4 to 16 MHZ and up to 25 MHZ if bypass) */
 #define PLL   2U  
 
+
+/**
+ * @brief Clock values
+ */
+
+#define RCC_4_MHZ               4000U
+#define RCC_5_MHZ               5000U
+#define RCC_6_MHZ               6000U
+#define RCC_7_MHZ               7000U
+#define RCC_8_MHZ               8000U
+#define RCC_9_MHZ               9000U
+#define RCC_10_MHZ              10000U
+#define RCC_11_MHZ              11000U
+#define RCC_12_MHZ              12000U
+#define RCC_13_MHZ              13000U
+#define RCC_14_MHZ              14000U
+#define RCC_15_MHZ              15000U
+#define RCC_16_MHZ              16000U
+#define RCC_17_MHZ              17000U
+#define RCC_18_MHZ              18000U
+#define RCC_19_MHZ              19000U
+#define RCC_20_MHZ              20000U
+#define RCC_21_MHZ              21000U
+#define RCC_22_MHZ              22000U
+#define RCC_23_MHZ              23000U
+#define RCC_24_MHZ              24000U
+#define RCC_25_MHZ              25000U
+
 /**
  * @brief HSE Clock Source options
  */
@@ -54,7 +82,7 @@
 #define PLL_CLK_MUL_BY_13   11U /* PLL input clock * 13 */
 #define PLL_CLK_MUL_BY_14   12U /* PLL input clock * 14 */
 #define PLL_CLK_MUL_BY_15   13U /* PLL input clock * 15 */
-#define PLL_CLK_MUL_BY_16   15U /* PLL input clock * 16 */
+#define PLL_CLK_MUL_BY_16   14U /* PLL input clock * 16 */
 
 
 /**
@@ -137,6 +165,12 @@
  */
 
 #define HSE_CLK_SRC     HSE_NOT_BYPASS
+
+/**
+ * @brief HSE clock value
+ * * Options (RCC_4_MHZ to RCC_25_MHZ)
+ */
+#define HSE_CLK_VAL_KHZ    RCC_8_MHZ
 
 /**
  * @brief PLL Clock Configuration
