@@ -376,4 +376,29 @@ typedef struct
 #define OSC_OFF                 0U
 #define OSC_ON                  1U
 
+/**
+ * @brief Division Factors
+ */
+
+#define DIV_BY_1                0U
+#define DIV_BY_2                1U 
+#define DIV_BY_4                2U
+#define DIV_BY_8                3U
+#define DIV_BY_16               4U
+#define DIV_BY_32               5U
+#define DIV_BY_64               6U
+#define DIV_BY_128              7U
+#define DIV_BY_256              8U
+#define DIV_BY_512              9U
+
+/**
+ * @brief PLL Multiplication Mapping Values
+ */
+#define PLL_MUL_MAP_VAL_1         1U
+#define PLL_MUL_MAP_VAL_2         2U
+
+/**
+ * @brief PLL Multiplication Validate End
+ */
+#define PLL_MUL_END_VALIDATE        1U
 #endif
