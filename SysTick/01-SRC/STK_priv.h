@@ -118,4 +118,9 @@ typedef struct
  */
 #define LOAD_REG_MAX_VALUE          0x00FFFFFF
 
+/**
+ * @brief Division Factor
+ */
+#define DIV_BY_8            3U
+
 #endif
