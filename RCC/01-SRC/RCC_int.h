@@ -54,12 +54,24 @@ typedef enum
     BKP    = (u8) 91 ,
 }RCC_peripheral_t;
 
+/**
+ * @brief Structure of needed clocks.
+ */
+typedef struct 
+{
+    u32 SYS_clk_KHZ;
+    u32 AHB_clk_KHZ;
+    u16 APB1_clk_KHZ;
+    u32 APB2_clk_KHZ;
+}RCC_clk_t;
+
 
 /**
  * @section APIs 
 */
 
 std_errorStatus_t RCC_init   				(void);
+std_errorStatus_t RCC_get_clk_value         (RCC_clk_t * local_strRCC_clk_value);
 std_errorStatus_t RCC_enable_peripheral_clk (RCC_peripheral_t local_enuPeripheral);
 std_errorStatus_t RCC_disable_peripheral_clk(RCC_peripheral_t local_enuPeripheral);
 std_errorStatus_t RCC_reset_peripheral  	(RCC_peripheral_t local_enuPeripheral);
