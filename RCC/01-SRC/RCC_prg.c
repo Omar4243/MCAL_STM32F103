@@ -376,3 +376,67 @@ std_errorStatus_t RCC_reset_peripheral(RCC_peripheral_t local_enuPeripheral)
 
     return error_state;
 }
+
+/**
+ * @brief This API is used to get clock value for (Sys clock, AHB clock, APB2 clock, APB1 clock).
+ * @param local_strRCC_clk_value is a pointer to structure which contains Sys, AHB, APB2 and APB1 clocks.
+ * @return Error state which describes the state of API (Passed or failed).
+ */
+std_errorStatus_t RCC_get_clk_value(RCC_clk_t * local_strRCC_clk_value)
+{
+    std_errorStatus_t error_state = STD_OK;
+
+    /* Check if the pointer is Null or not */
+    if(local_strRCC_clk_value != STD_NULL)
+    {
+        /* Check is the system clock value is accpeted or not */
+        if((CLK_VALUE -> SYS_clk_KHZ) <= SYS_CLK_MAX_KHZ)
+        {
+            /* Update system clock value */
+            local_strRCC_clk_value -> SYS_clk_KHZ = CLK_VALUE -> SYS_clk_KHZ;
+        }
+        else
+        {
+            error_state = STD_NOT_VALID_VALUE;
+        }
+
+        /* Check is the AHB clock value is accpeted or not */
+        if((CLK_VALUE -> AHB_clk_KHZ) <= AHB_CLK_MAX_KHZ)
+        {
+            /* Update AHB clock value */
+            local_strRCC_clk_value -> AHB_clk_KHZ = CLK_VALUE -> AHB_clk_KHZ;
+        }
+        else
+        {
+            error_state = STD_NOT_VALID_VALUE;
+        }
+
+        /* Check is the APB2 clock value is accpeted or not */
+        if((CLK_VALUE -> APB2_clk_KHZ) <= APB2_CLK_MAX_KHZ)
+        {
+            /* Update APB2 clock value */
+            local_strRCC_clk_value -> APB2_clk_KHZ = CLK_VALUE -> APB2_clk_KHZ;
+        }
+        else
+        {
+            error_state = STD_NOT_VALID_VALUE;
+        }
+
+        /* Check is the APB1 clock value is accpeted or not */
+        if((CLK_VALUE -> APB1_clk_KHZ) <= APB1_CLK_MAX_KHZ)
+        {
+            /* Update APB1 clock value */
+            local_strRCC_clk_value -> APB1_clk_KHZ = CLK_VALUE -> APB1_clk_KHZ;
+        }
+        else
+        {
+            error_state = STD_NOT_VALID_VALUE;
+        }
+    }
+    else
+    {
+        error_state = STD_NULL_POINTER;
+    }
+    
+    return error_state;
+}
