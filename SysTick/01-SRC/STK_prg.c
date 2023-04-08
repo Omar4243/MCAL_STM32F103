@@ -1,8 +1,8 @@
 /*****************************************************************************
- * @Author                : Islam Tarek<islam.tarek@valeo.com>               *
+ * @Author                : Islam Tarek<islamtarek0550@gmail.com>            *
  * @CreatedDate           : 2023-04-01 23:11:23                              *
- * @LastEditors           : Islam Tarek<islam.tarek@valeo.com>               *
- * @LastEditDate          : 2023-04-04 13:53:56                              *
+ * @LastEditors           : Islam Tarek<islamtarek0550@gmail.com>            *
+ * @LastEditDate          : 2023-04-08 16:00:15                              *
  * @FilePath              : STK_prg.c                                        *
  ****************************************************************************/
 
@@ -92,7 +92,7 @@ std_errorStatus_t STK_set_period_us(u32 local_u32Pertiod)
     if( STK_u32Load_Value <= LOAD_REG_MAX_VALUE)
     {
         /* Update the load register */
-        ((STK_REG -> STK_LOAD).bits.RELOAD) = STK_u32Load_Value;
+        ((STK_REG -> STK_LOAD).bits.RELOAD) = STK_u32Load_Value - STK_MODE;
     }
     else
     {
@@ -141,4 +141,23 @@ std_errorStatus_t STK_set_callback_function(void(*local_cb_func)(void))
     }
 
     return error_state;
+}
+
+void SysTick_handler(void)
+{
+    u8 flag_reading = FLAG_NOT_READ;
+    
+    /* Check if there is call back function or not */
+    if(STK_ISR_FUNC != STD_NULL)
+    {
+        /* Call the callback function */
+        STK_ISR_FUNC();
+    }
+    else
+    {
+        /* Do Nothing */
+    }
+
+    /* Clear flag */
+    flag_reading  = CHECK_BIT((STK_REG -> STK_CTRL.reg), (STK_REG -> STK_CTRL.bits.COUNT_FLAG));
 }
