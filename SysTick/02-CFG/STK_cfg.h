@@ -1,8 +1,8 @@
 /*****************************************************************************
- * @Author                : Islam Tarek<islam.tarek@valeo.com>               *
+ * @Author                : Islam Tarek<islamtarek0550@gmail.com>            *
  * @CreatedDate           : 2023-04-01 23:13:02                              *
- * @LastEditors           : Islam Tarek<islam.tarek@valeo.com>               *
- * @LastEditDate          : 2023-04-03 22:39:29                              *
+ * @LastEditors           : Islam Tarek<islamtarek0550@gmail.com>            *
+ * @LastEditDate          : 2023-04-08 15:59:54                              *
  * @FilePath              : STK_cfg.h                                        *
  ****************************************************************************/
 
@@ -26,6 +26,13 @@
 #define STK_EXCEPTION_REQ_ENABLE    1U  /* Systick interrupt is enabled when counts down to 0  */
 
 /**
+ * @brief Systick Mode options
+ */
+
+#define STK_SINGLE_MODE             0U
+#define STK_PERIODIC_MODE           1U
+
+/**
  * @section Configurations
 */
 
@@ -34,7 +41,7 @@
  * Options (STK_AHB_CLK_DIV_BY_8, STK_AHB_CLK)
  */
 
-#define STK_CLK_SRC     STK_AHB_CLK
+#define STK_CLK_SRC     STK_AHB_CLK_DIV_BY_8
 
 /**
  * @brief SysTick exception request configuration
@@ -42,5 +49,12 @@
  */
 
 #define STK_EXCEPTION_REQ_STATE     STK_EXCEPTION_REQ_ENABLE
+
+/**
+ * @brief Systick Mode (Periodic / Single) configuration
+ * Options (STK_SINGLE_MODE, STK_PERIODIC_MODE)
+ */
+
+#define STK_MODE        STK_PERIODIC_MODE
 
 #endif
