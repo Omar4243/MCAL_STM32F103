@@ -1,8 +1,8 @@
 /*****************************************************************************
- * @Author                : Islam Tarek<islam.tarek@valeo.com>               *
+ * @Author                : Islam Tarek<islamtarek0550@gmail.com>            *
  * @CreatedDate           : 2023-04-01 23:12:18                              *
- * @LastEditors           : Islam Tarek<islam.tarek@valeo.com>               *
- * @LastEditDate          : 2023-04-03 22:07:02                              *
+ * @LastEditors           : Islam Tarek<islamtarek0550@gmail.com>            *
+ * @LastEditDate          : 2023-04-08 15:19:00                              *
  * @FilePath              : STK_priv.h                                       *
  ****************************************************************************/
 
@@ -95,7 +95,7 @@ typedef struct
 /**
  * @brief SysTick Registers Base Address
  */
-#define STK_BASE      0xE000E010    
+#define STK_BASE      0xE000E010UL    
 
 /**
  * @brief Map SysTick Registers to Memory 
@@ -111,16 +111,20 @@ typedef struct
 /**
  * @brief Convert from milli seconds to micro seconds
  */
-#define CONVERT_FROM_MS_TO_US       1000
+#define CONVERT_FROM_MS_TO_US       1000UL
 
 /**
  * @brief Limit of Load register 
  */
-#define LOAD_REG_MAX_VALUE          0x00FFFFFF
+#define LOAD_REG_MAX_VALUE          0x00FFFFFFUL
 
 /**
  * @brief Division Factor
  */
-#define DIV_BY_8            3U
+#define DIV_BY_8                    3U
 
+/**
+ * @brief FLag readings
+ */
+#define FLAG_NOT_READ               0U
 #endif
